@@ -139,7 +139,7 @@ export function LandingHeader({
             onClick={() => setMenuOpen(true)}
             aria-label="Open menu"
             aria-expanded={menuOpen}
-            className="inline-flex size-11 cursor-pointer items-center justify-center justify-self-end rounded-full border border-white/14 bg-[rgba(18,20,26,0.5)] p-0 text-white backdrop-blur-[14px] min-[820px]:hidden"
+            className="col-start-3 inline-flex size-11 cursor-pointer items-center justify-center justify-self-end rounded-full border border-white/14 bg-[rgba(18,20,26,0.5)] p-0 text-white backdrop-blur-[14px] min-[820px]:hidden"
           >
             <Menu size={20} strokeWidth={2.2} aria-hidden="true" />
           </button>
@@ -148,7 +148,7 @@ export function LandingHeader({
           <Link
             href={current === "consultation" ? phoneHref : "/consultation"}
             aria-label={current === "consultation" ? `Call ${site.contact.phone}` : "Book a free consultation"}
-            className={`inline-flex items-center gap-3 justify-self-end whitespace-nowrap rounded-full border py-[11px] pl-3.5 pr-3.5 text-sm font-bold transition-colors duration-200 min-[820px]:pr-5 ${
+            className={`hidden items-center gap-3 justify-self-end whitespace-nowrap rounded-full border py-[11px] pl-3.5 pr-3.5 text-sm font-bold transition-colors duration-200 min-[820px]:inline-flex min-[820px]:pr-5 ${
               current === "consultation"
                 ? "border-white bg-white text-jp-ink"
                 : "border-white/14 bg-[rgba(18,20,26,0.5)] text-white backdrop-blur-[14px] hover:border-white"
