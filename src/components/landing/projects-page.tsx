@@ -68,8 +68,8 @@ export function ProjectsPage() {
           className="overflow-hidden bg-jp-ink pb-[clamp(80px,10vw,140px)] pt-[clamp(24px,4vw,56px)]"
         >
           <div className="flex flex-col gap-[clamp(64px,8vw,112px)]">
-            {projects.map((project, i) => (
-              <ProjectStrip key={project.slug} project={project} index={i} />
+            {projects.map((project) => (
+              <ProjectStrip key={project.slug} project={project} />
             ))}
           </div>
         </section>
@@ -111,7 +111,7 @@ export function ProjectsPage() {
 }
 
 /** One project: heading row, a horizontally scrolling photo strip, then the summary. */
-function ProjectStrip({ project, index }: { project: Project; index: number }) {
+function ProjectStrip({ project }: { project: Project }) {
   const photos = [{ src: project.image, alt: project.alt }, ...(project.gallery ?? [])];
   const meta = [
     { k: "Scope", v: project.category },
@@ -126,7 +126,7 @@ function ProjectStrip({ project, index }: { project: Project; index: number }) {
       >
         <div className="flex min-w-0 flex-col gap-2">
           <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/60">
-            <span className="text-jp-red">{String(index + 1).padStart(2, "0")}</span> &middot; {project.location}
+            {project.location}
           </span>
           <h2
             id={`${project.slug}-title`}
