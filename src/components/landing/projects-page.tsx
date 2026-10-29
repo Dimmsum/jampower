@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { projects, type Project } from "@/data/site";
 import { ChatWidget, LandingFooter, LandingHeader, useLandingScroll } from "@/components/landing/chrome";
@@ -113,7 +113,6 @@ export function ProjectsPage() {
 /** One project: heading row, a horizontally scrolling photo strip, then the summary. */
 function ProjectStrip({ project, index }: { project: Project; index: number }) {
   const photos = [{ src: project.image, alt: project.alt }, ...(project.gallery ?? [])];
-  const single = photos.length === 1;
   const meta = [
     { k: "Scope", v: project.category },
     { k: "Location", v: project.location },
@@ -146,18 +145,66 @@ function ProjectStrip({ project, index }: { project: Project; index: number }) {
         </dl>
       </div>
 
-      {/* Side padding lines the first photo up with the 1200px content column. */}
-      <div
-        data-stop
-        className="jp-reveal flex snap-x snap-mandatory gap-3 overflow-x-auto pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        style={{
-          ["--jp-delay" as string]: "100ms",
-          paddingInline: "max(20px, calc((100% - 1200px) / 2 + clamp(20px, 6vw, 96px)))",
-        }}
-      >
-        {photos.map((photo) => (
+      <PhotoStrip photos={photos} />
+
+      <div data-stop className="jp-reveal mx-auto w-full max-w-[1200px] px-[clamp(20px,6vw,96px)]">
+        <p className="m-0 max-w-[60ch] text-[clamp(15px,1.1vw,17px)] leading-[1.6] text-white/75 text-pretty">
+          {project.summary}
+        </p>
+      </div>
+    </article>
+  );
+}
+
+/**
+ * Horizontally scrolling photo strip. With more than one photo the set is rendered three times
+ * and the scroll position is recentred on the middle copy, so scrolling past either end wraps.
+ */
+function PhotoStrip({ photos }: { photos: { src: string; alt: string }[] }) {
+  const single = photos.length === 1;
+  const copies = single ? [0] : [0, 1, 2];
+  const scrollerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (!el || single) return;
+
+    const setWidth = () => {
+      const first = el.querySelector<HTMLElement>('[data-copy="0"]');
+      const second = el.querySelector<HTMLElement>('[data-copy="1"]');
+      return first && second ? second.offsetLeft - first.offsetLeft : 0;
+    };
+
+    el.scrollLeft = setWidth();
+
+    const onScroll = () => {
+      const w = setWidth();
+      if (!w) return;
+      if (el.scrollLeft < w * 0.5) el.scrollLeft += w;
+      else if (el.scrollLeft >= w * 1.5) el.scrollLeft -= w;
+    };
+
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, [single]);
+
+  return (
+    // Side padding lines the first photo up with the 1200px content column.
+    <div
+      ref={scrollerRef}
+      data-stop
+      className="jp-reveal flex snap-x snap-mandatory gap-3 overflow-x-auto pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      style={{
+        ["--jp-delay" as string]: "100ms",
+        paddingInline: "max(20px, calc((100% - 1200px) / 2 + clamp(20px, 6vw, 96px)))",
+      }}
+    >
+      {copies.flatMap((copy) =>
+        photos.map((photo, i) => (
           <div
-            key={photo.src}
+            key={`${copy}-${photo.src}`}
+            data-copy={i === 0 ? copy : undefined}
+            aria-hidden={copy === 1 || single ? undefined : true}
             className={`relative flex-none snap-start overflow-hidden rounded-lg bg-[#171B22] ${
               single
                 ? "aspect-[4/3] w-full max-w-[1008px] sm:aspect-[21/9]"
@@ -166,20 +213,14 @@ function ProjectStrip({ project, index }: { project: Project; index: number }) {
           >
             <Image
               src={photo.src}
-              alt={photo.alt}
+              alt={copy === 1 || single ? photo.alt : ""}
               fill
               sizes={single ? "(min-width: 1200px) 1008px, 100vw" : "(min-width: 1334px) 560px, 42vw"}
               className="object-cover transition-transform duration-[600ms] ease-[cubic-bezier(.2,.7,.2,1)] hover:scale-[1.03]"
             />
           </div>
-        ))}
-      </div>
-
-      <div data-stop className="jp-reveal mx-auto w-full max-w-[1200px] px-[clamp(20px,6vw,96px)]">
-        <p className="m-0 max-w-[60ch] text-[clamp(15px,1.1vw,17px)] leading-[1.6] text-white/75 text-pretty">
-          {project.summary}
-        </p>
-      </div>
-    </article>
+        )),
+      )}
+    </div>
   );
 }

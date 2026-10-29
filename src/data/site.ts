@@ -54,41 +54,53 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: "toyota-jamaica",
-    title: "Toyota Jamaica",
-    location: "Jamaica",
-    category: "Commercial Solar",
-    summary: "Solar project at the Toyota Jamaica dealership.", // TODO: confirm scope
-    image: "/images/projects/toyota-jamaica.jpg",
-    alt: "Toyota Jamaica dealership building",
-  },
-  {
     slug: "toyota-montego-bay",
     title: "Toyota Montego Bay",
     location: "Montego Bay",
     category: "Commercial Solar",
     summary: "Solar project at the Toyota Montego Bay dealership.", // TODO: confirm scope
-    image: "/images/projects/toyota-mobay.jpg",
-    alt: "Toyota Montego Bay dealership",
-    gallery: [{ src: "/images/projects/toyota-mobay-2.avif", alt: "Solar installation at Toyota Montego Bay" }],
+    image: "/images/projects/toyota-montego-bay/01.webp",
+    alt: "Solar installation at Toyota Montego Bay",
+    gallery: [
+      { src: "/images/projects/toyota-montego-bay/02.webp", alt: "Solar installation at Toyota Montego Bay, photo 3" },
+      { src: "/images/projects/toyota-montego-bay/03.webp", alt: "Solar installation at Toyota Montego Bay, photo 4" },
+      { src: "/images/projects/toyota-montego-bay/04.webp", alt: "Solar installation at Toyota Montego Bay, photo 5" },
+      { src: "/images/projects/toyota-montego-bay/05.webp", alt: "Solar installation at Toyota Montego Bay, photo 6" },
+      { src: "/images/projects/toyota-montego-bay/06.webp", alt: "Solar installation at Toyota Montego Bay, photo 7" },
+    ],
   },
   {
-    slug: "toyota-spanish-town-road",
-    title: "Toyota Spanish Town Road",
-    location: "Spanish Town",
+    slug: "fontana-waterloo",
+    title: "Fontana Waterloo Rd",
+    location: "Waterloo Rd, Kingston",
     category: "Commercial Solar",
-    summary: "Solar project at the Toyota Spanish Town Road branch.", // TODO: confirm scope
-    image: "/images/projects/toyota-spanish-town.jpg",
-    alt: "Toyota Spanish Town Road branch",
+    summary: "Rooftop solar system at the Fontana Pharmacy Waterloo Rd location.", // TODO: confirm scope
+    image: "/images/projects/fontana-waterloo/01.webp",
+    alt: "Solar installation at Fontana Pharmacy, Waterloo Rd",
+    gallery: [
+      { src: "/images/projects/fontana-waterloo/02.webp", alt: "Solar installation at Fontana Pharmacy, Waterloo Rd, photo 3" },
+      { src: "/images/projects/fontana-waterloo/03.webp", alt: "Solar installation at Fontana Pharmacy, Waterloo Rd, photo 4" },
+      { src: "/images/projects/fontana-waterloo/04.webp", alt: "Solar installation at Fontana Pharmacy, Waterloo Rd, photo 5" },
+      { src: "/images/projects/fontana-waterloo/05.webp", alt: "Solar installation at Fontana Pharmacy, Waterloo Rd, photo 6" },
+    ],
   },
   {
-    slug: "utility-solar-farm",
-    title: "Utility Solar Farm",
-    location: "Jamaica",
-    category: "Solar Farm",
-    summary: "Ground-mounted solar array on an open site.", // TODO: confirm scope
-    image: "/images/solar-farm.avif",
-    alt: "Aerial view of a ground-mounted solar farm",
+    slug: "toyota-old-hope-road",
+    title: "Toyota Old Hope Road",
+    location: "Old Hope Rd, Kingston",
+    category: "Commercial Solar",
+    summary: "Solar project at the Toyota Jamaica Old Hope Road dealership.", // TODO: confirm scope
+    image: "/images/projects/toyota-old-hope-road/01.jpg",
+    alt: "Solar installation at Toyota Old Hope Road",
+  },
+  {
+    slug: "pricesmart-kingston",
+    title: "PriceSmart Kingston",
+    location: "Kingston",
+    category: "Commercial Solar",
+    summary: "Solar project at the PriceSmart Kingston warehouse club.", // TODO: confirm scope
+    image: "/images/projects/pricesmart-kingston/01.webp",
+    alt: "Solar installation at PriceSmart Kingston",
   },
 ];
 
