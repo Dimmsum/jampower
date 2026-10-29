@@ -54,20 +54,25 @@ export function LandingPage() {
 
       // Piecewise-linear map from reading-line position to rail length.
       const knots: [number, number][] = [[0, 0]];
-      for (const c of centers) knots.push([c - RING_HALF, c], [c + RING_HALF, c]);
+      for (const c of centers)
+        knots.push([c - RING_HALF, c], [c + RING_HALF, c]);
       knots.push([r.height, r.height]);
       let fill = s <= 0 ? 0 : r.height;
       for (let k = 1; k < knots.length; k++) {
         const [s0, f0] = knots[k - 1];
         const [s1, f1] = knots[k];
         if (s <= s1) {
-          fill = s1 > s0 ? f0 + ((f1 - f0) * Math.max(0, s - s0)) / (s1 - s0) : f1;
+          fill =
+            s1 > s0 ? f0 + ((f1 - f0) * Math.max(0, s - s0)) / (s1 - s0) : f1;
           break;
         }
       }
 
       dots.forEach((dot, k) => {
-        const ring = Math.max(0, Math.min(1, (s - (centers[k] - RING_HALF)) / (2 * RING_HALF)));
+        const ring = Math.max(
+          0,
+          Math.min(1, (s - (centers[k] - RING_HALF)) / (2 * RING_HALF)),
+        );
         const arc = dot.querySelector<SVGCircleElement>("[data-ring]");
         if (arc) arc.style.strokeDashoffset = (1 - ring).toFixed(4);
       });
@@ -79,13 +84,19 @@ export function LandingPage() {
 
     if (teamRef.current && teamImgRef.current) {
       const tr = teamRef.current.getBoundingClientRect();
-      const t = Math.max(-1, Math.min(1, (tr.top + tr.height / 2 - vh / 2) / vh));
+      const t = Math.max(
+        -1,
+        Math.min(1, (tr.top + tr.height / 2 - vh / 2) / vh),
+      );
       teamImgRef.current.style.transform = `translate3d(0,${(t * -10).toFixed(2)}%,0)`;
     }
   });
 
   return (
-    <div ref={rootRef} className="bg-jp-ink font-manrope text-white antialiased">
+    <div
+      ref={rootRef}
+      className="bg-jp-ink font-manrope text-white antialiased"
+    >
       <LandingHeader
         current="home"
         navRef={navRef}
@@ -132,14 +143,23 @@ export function LandingPage() {
 
           <div className="relative z-[2] mx-auto flex min-h-[max(100vh,760px)] max-w-[1400px] flex-col px-[clamp(20px,6vw,96px)] pb-6 pt-28">
             <div className="flex flex-1 items-center justify-center py-6">
-              <div ref={textRef} className="flex flex-col items-center text-center will-change-transform">
+              <div
+                ref={textRef}
+                className="flex flex-col items-center text-center will-change-transform"
+              >
                 <h1 className="mt-[26px] max-w-[14ch] text-[clamp(44px,6.4vw,104px)] font-bold leading-[1.02] tracking-[-0.035em] text-balance">
-                  <span data-fade className="-mt-[0.12em] block overflow-hidden pb-[0.06em] pt-[0.12em]">
+                  <span
+                    data-fade
+                    className="-mt-[0.12em] block overflow-hidden pb-[0.06em] pt-[0.12em]"
+                  >
                     <span className="block animate-[jpRise_1000ms_cubic-bezier(.2,.7,.2,1)_750ms_both]">
                       Power your business.
                     </span>
                   </span>
-                  <span data-fade className="-mt-[0.12em] block overflow-hidden pb-[0.06em] pt-[0.12em]">
+                  <span
+                    data-fade
+                    className="-mt-[0.12em] block overflow-hidden pb-[0.06em] pt-[0.12em]"
+                  >
                     <span className="block font-normal tracking-[-0.02em] text-jp-cream animate-[jpRise_1000ms_cubic-bezier(.2,.7,.2,1)_900ms_both]">
                       Build it to last.
                     </span>
@@ -147,13 +167,16 @@ export function LandingPage() {
                 </h1>
                 <div data-fade>
                   <p className="mx-auto mt-[26px] max-w-[44ch] text-[clamp(17px,1.45vw,22px)] font-medium leading-[1.6] text-white text-pretty [text-shadow:0_2px_24px_rgba(14,17,22,0.9),0_1px_2px_rgba(14,17,22,0.8)] animate-[jpUp_1000ms_cubic-bezier(.2,.7,.2,1)_1150ms_both]">
-                    Affordable energy and construction solutions, engineered for Caribbean sun, storms
-                    and budgets.
+                    Affordable energy and construction solutions, engineered for
+                    Caribbean sun, storms and budgets.
                   </p>
                 </div>
                 <div data-fade>
                   <div className="mt-9 flex flex-wrap items-center justify-center gap-3.5 animate-[jpUp_1000ms_cubic-bezier(.2,.7,.2,1)_1300ms_both]">
-                    <PrimaryCta href="/consultation" label="Free consultation" />
+                    <PrimaryCta
+                      href="/consultation"
+                      label="Free consultation"
+                    />
                     <Link
                       href="/projects"
                       className="inline-flex items-center gap-2.5 rounded-full border border-white/30 px-[26px] py-[17px] text-base font-semibold text-white [transition:border-color_200ms_ease,background_200ms_ease] hover:border-white hover:bg-white/8"
@@ -173,14 +196,21 @@ export function LandingPage() {
           className="relative bg-jp-ink px-[clamp(20px,6vw,96px)] pb-[clamp(96px,12vw,160px)] pt-[clamp(40px,6vw,80px)] text-white"
         >
           <div className="mx-auto max-w-[1200px]">
-            <div data-stop className="jp-reveal flex flex-col items-center text-center">
-              <Eyebrow centered tone="dark">Trusted partners</Eyebrow>
+            <div
+              data-stop
+              className="jp-reveal flex flex-col items-center text-center"
+            >
+              <Eyebrow centered tone="dark">
+                Trusted Clients
+              </Eyebrow>
               <h2
                 id="partners-heading"
                 className="mt-5 max-w-[16ch] text-[clamp(34px,4.4vw,68px)] font-bold leading-[1.02] tracking-[-0.035em] text-balance"
               >
                 Trusted across the region.{" "}
-                <span className="font-normal text-jp-cream">A few of the people we work with.</span>
+                <span className="font-normal text-jp-cream">
+                  A few of the people we have workedwith.
+                </span>
               </h2>
             </div>
 
@@ -206,7 +236,9 @@ export function LandingPage() {
                     >
                       <div
                         className={`relative col-start-2 row-start-1 ${
-                          left ? "min-[820px]:col-start-1" : "min-[820px]:col-start-3"
+                          left
+                            ? "min-[820px]:col-start-1"
+                            : "min-[820px]:col-start-3"
                         }`}
                       >
                         {t.image ? (
@@ -225,7 +257,10 @@ export function LandingPage() {
                             </div>
                           </>
                         ) : (
-                          <ClientPanel project={t.project} location={t.location} />
+                          <ClientPanel
+                            project={t.project}
+                            location={t.location}
+                          />
                         )}
                       </div>
 
@@ -233,8 +268,19 @@ export function LandingPage() {
                         data-dot
                         className="relative z-10 col-start-1 row-start-1 flex size-7 items-center justify-center self-start justify-self-center rounded-full bg-jp-ink text-[11px] font-extrabold text-white min-[820px]:col-start-2 min-[820px]:self-center"
                       >
-                        <svg viewBox="0 0 28 28" className="absolute inset-0 -rotate-90" aria-hidden="true">
-                          <circle cx="14" cy="14" r="13" fill="none" stroke="rgba(255,255,255,0.18)" strokeWidth="2" />
+                        <svg
+                          viewBox="0 0 28 28"
+                          className="absolute inset-0 -rotate-90"
+                          aria-hidden="true"
+                        >
+                          <circle
+                            cx="14"
+                            cy="14"
+                            r="13"
+                            fill="none"
+                            stroke="rgba(255,255,255,0.18)"
+                            strokeWidth="2"
+                          />
                           <circle
                             data-ring
                             cx="14"
@@ -248,12 +294,16 @@ export function LandingPage() {
                             strokeDashoffset="1"
                           />
                         </svg>
-                        <span className="relative">{String(i + 1).padStart(2, "0")}</span>
+                        <span className="relative">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
                       </div>
 
                       <figure
                         className={`col-start-2 row-start-2 pt-8 min-[820px]:row-start-1 min-[820px]:pt-0 ${
-                          left ? "min-[820px]:col-start-3" : "min-[820px]:col-start-1"
+                          left
+                            ? "min-[820px]:col-start-3"
+                            : "min-[820px]:col-start-1"
                         }`}
                       >
                         <QuoteMark />
@@ -262,11 +312,21 @@ export function LandingPage() {
                         </blockquote>
                         <figcaption className="mt-7 flex items-center gap-4 border-t border-white/14 pt-6">
                           <span className="relative size-[88px] flex-none overflow-hidden rounded-full ring-[1.5px] ring-white/20">
-                            <Image src={t.photo} alt={`Portrait of ${t.author}`} fill sizes="88px" className="object-cover" />
+                            <Image
+                              src={t.photo}
+                              alt={`Portrait of ${t.author}`}
+                              fill
+                              sizes="88px"
+                              className="object-cover"
+                            />
                           </span>
                           <span>
-                            <span className="block text-base font-bold">{t.author}</span>
-                            <span className="mt-0.5 block text-[13px] text-white/60">{t.role}</span>
+                            <span className="block text-base font-bold">
+                              {t.author}
+                            </span>
+                            <span className="mt-0.5 block text-[13px] text-white/60">
+                              {t.role}
+                            </span>
                           </span>
                         </figcaption>
                       </figure>
@@ -283,7 +343,11 @@ export function LandingPage() {
               <p className="m-0 max-w-[36ch] text-[clamp(20px,2vw,30px)] font-semibold leading-[1.3] tracking-[-0.02em] text-balance">
                 Want to see what they helped us build?
               </p>
-              <PrimaryCta href="/projects" label="View our projects" shadow={false} />
+              <PrimaryCta
+                href="/projects"
+                label="View our projects"
+                shadow={false}
+              />
             </div>
           </div>
         </section>
@@ -304,13 +368,17 @@ export function LandingPage() {
                   id="about-heading"
                   className="mt-5 text-[clamp(34px,4.2vw,64px)] font-bold leading-[1.02] tracking-[-0.035em] text-balance"
                 >
-                  Jampower. <span className="font-normal text-jp-red">The commercial solar experts.</span>
+                  Jampower.{" "}
+                  <span className="font-normal text-jp-red">
+                    The commercial solar experts.
+                  </span>
                 </h2>
               </div>
               <p className="m-0 text-[clamp(16px,1.2vw,19px)] leading-[1.65] text-jp-ink/75 text-pretty">
-                Our know-how in Commercial &amp; Industrial solar projects gave us the opportunity to
-                work with the best clients around the region, and we are glad about the confidence we
-                built up with our clients-partners during all these years.
+                Our know-how in Commercial &amp; Industrial solar projects gave
+                us the opportunity to work with the best clients around the
+                region, and we are glad about the confidence we built up with
+                our clients-partners during all these years.
               </p>
             </div>
 
@@ -320,7 +388,10 @@ export function LandingPage() {
                 data-stop
                 className="jp-reveal relative aspect-video w-full overflow-hidden rounded-lg [--jp-dur:900ms]"
               >
-                <div ref={teamImgRef} className="absolute inset-x-0 -inset-y-[10%] will-change-transform">
+                <div
+                  ref={teamImgRef}
+                  className="absolute inset-x-0 -inset-y-[10%] will-change-transform"
+                >
                   <Image
                     src="/images/team-aerial.png"
                     alt="The Jampower team on a rooftop installation"
@@ -335,25 +406,28 @@ export function LandingPage() {
                 className="jp-reveal flex flex-col min-[820px]:pt-2 [--jp-delay:150ms] [--jp-dur:900ms]"
               >
                 <p className="mb-7 text-[clamp(16px,1.2vw,19px)] leading-[1.65] text-jp-ink/75 text-pretty">
-                  Jampower focuses on high quality solutions to ensure the longest system lifespan. Our
-                  O&amp;M solutions play a main role in reaching those lifespan targets.
+                  Jampower focuses on high quality solutions to ensure the
+                  longest system lifespan. Our O&amp;M solutions play a main
+                  role in reaching those lifespan targets.
                 </p>
                 <ul>
-                  {["Commercial & Industrial", "Design & Install", "Operations & Maintenance"].map(
-                    (item, i, all) => (
-                      <li
-                        key={item}
-                        className={`flex items-center justify-between gap-4 border-t border-jp-ink/14 py-[18px] ${
-                          i === all.length - 1 ? "border-b" : ""
-                        }`}
-                      >
-                        <span className="text-base font-bold">{item}</span>
-                        <span className="text-xs font-bold text-jp-red">
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
-                      </li>
-                    ),
-                  )}
+                  {[
+                    "Commercial & Industrial",
+                    "Design & Install",
+                    "Operations & Maintenance",
+                  ].map((item, i, all) => (
+                    <li
+                      key={item}
+                      className={`flex items-center justify-between gap-4 border-t border-jp-ink/14 py-[18px] ${
+                        i === all.length - 1 ? "border-b" : ""
+                      }`}
+                    >
+                      <span className="text-base font-bold">{item}</span>
+                      <span className="text-xs font-bold text-jp-red">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -384,12 +458,15 @@ export function LandingPage() {
                   id="solutions-heading"
                   className="mt-5 text-[clamp(34px,4.4vw,68px)] font-bold leading-[1.02] tracking-[-0.035em] text-balance"
                 >
-                  Get rid of <span className="font-normal text-jp-cream">your energy bill.</span>
+                  Get rid of{" "}
+                  <span className="font-normal text-jp-cream">
+                    your energy bill.
+                  </span>
                 </h2>
               </div>
               <p className="m-0 max-w-[46ch] text-[clamp(16px,1.2vw,19px)] leading-[1.6] text-white/80 text-pretty">
-                Harness the sun to generate your own electricity, cut your dependence on the grid and
-                reduce your environmental impact.
+                Harness the sun to generate your own electricity, cut your
+                dependence on the grid and reduce your environmental impact.
               </p>
             </div>
 
@@ -399,19 +476,24 @@ export function LandingPage() {
                   100%
                 </div>
                 <SolutionBody title="We save our clients up to 100% on their electric bill.">
-                  Solar PV turns abundant sunlight into power for your business, so you rely less on
-                  costly grid electricity and its unpredictable rate hikes.
+                  Solar PV turns abundant sunlight into power for your business,
+                  so you rely less on costly grid electricity and its
+                  unpredictable rate hikes.
                 </SolutionBody>
               </SolutionCard>
 
               <SolutionCard label="Design" num="02" highlight>
                 <div className="text-[clamp(28px,2.6vw,40px)] font-extrabold leading-[1.05] tracking-[-0.03em]">
-                  Built for the <span className="font-normal text-jp-cream">Caribbean</span>
+                  Built for the{" "}
+                  <span className="font-normal text-jp-cream">Caribbean</span>
                 </div>
-                <SolutionBody title="Solar solutions tailored for Caribbean climate." highlight>
-                  Our team designs and installs systems for optimal mechanical and electrical
-                  performance, engineered to withstand the region&apos;s most adverse conditions for
-                  decades.
+                <SolutionBody
+                  title="Solar solutions tailored for Caribbean climate."
+                  highlight
+                >
+                  Our team designs and installs systems for optimal mechanical
+                  and electrical performance, engineered to withstand the
+                  region&apos;s most adverse conditions for decades.
                 </SolutionBody>
               </SolutionCard>
 
@@ -422,15 +504,19 @@ export function LandingPage() {
                     "Control over your own supply",
                     "A cleaner, more sustainable future",
                   ].map((item) => (
-                    <li key={item} className="flex items-center gap-3 text-[15px] font-semibold">
+                    <li
+                      key={item}
+                      className="flex items-center gap-3 text-[15px] font-semibold"
+                    >
                       <span className="size-2 flex-none rounded-full bg-jp-red" />
                       {item}
                     </li>
                   ))}
                 </ul>
                 <SolutionBody title="A win for your budget and the environment.">
-                  Say goodbye to high electricity bills and hello to substantial savings. Contact us
-                  today to start your journey towards a brighter, more cost-effective energy future.
+                  Say goodbye to high electricity bills and hello to substantial
+                  savings. Contact us today to start your journey towards a
+                  brighter, more cost-effective energy future.
                 </SolutionBody>
               </SolutionCard>
             </div>
@@ -459,7 +545,9 @@ function SolutionCard({
     <div
       data-stop
       className={`jp-reveal flex flex-col gap-7 rounded-lg p-[clamp(24px,2.6vw,36px)] ${
-        highlight ? "bg-jp-red text-white" : "border border-white/14 bg-[rgba(20,24,31,0.78)]"
+        highlight
+          ? "bg-jp-red text-white"
+          : "border border-white/14 bg-[rgba(20,24,31,0.78)]"
       }`}
     >
       <div
@@ -498,18 +586,28 @@ function SolutionBody({
   );
 }
 
-
 // Stands in for the site photo when a testimonial has none: same footprint,
 // so the timeline keeps its rhythm, with the client name set large instead.
-function ClientPanel({ project, location }: { project: string; location: string }) {
+function ClientPanel({
+  project,
+  location,
+}: {
+  project: string;
+  location: string;
+}) {
   return (
     <div className="relative flex aspect-[16/9] w-full flex-col justify-end overflow-hidden rounded-lg border border-white/10 bg-[#151a21] p-[clamp(24px,3vw,40px)] shadow-[0_30px_60px_rgba(0,0,0,0.45)] min-[820px]:aspect-[4/3]">
       <div
         aria-hidden="true"
         className="absolute inset-0 [background-image:linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:44px_30px] [mask-image:radial-gradient(120%_90%_at_100%_0%,#000_10%,transparent_70%)]"
       />
-      <div aria-hidden="true" className="absolute right-0 top-0 h-1 w-1/3 bg-jp-red" />
-      <span className="relative text-[12px] font-bold uppercase tracking-[0.18em] text-white/50">Client</span>
+      <div
+        aria-hidden="true"
+        className="absolute right-0 top-0 h-1 w-1/3 bg-jp-red"
+      />
+      <span className="relative text-[12px] font-bold uppercase tracking-[0.18em] text-white/50">
+        Client
+      </span>
       <span className="relative mt-3 text-[clamp(44px,6vw,88px)] font-bold leading-none tracking-[-0.04em]">
         {project}
       </span>
@@ -522,7 +620,13 @@ function ClientPanel({ project, location }: { project: string; location: string 
 
 function QuoteMark() {
   return (
-    <svg width="36" height="27" viewBox="0 0 40 30" fill="#E3262B" aria-hidden="true">
+    <svg
+      width="36"
+      height="27"
+      viewBox="0 0 40 30"
+      fill="#E3262B"
+      aria-hidden="true"
+    >
       <path d="M0 30V17.6C0 7.9 5.6 1.9 16.2 0l2 4.4c-5.2 1.4-8.4 4.4-9 9H17V30H0zm23 0V17.6C23 7.9 28.6 1.9 39.2 0l2 4.4c-5.2 1.4-8.4 4.4-9 9H40V30H23z" />
     </svg>
   );
