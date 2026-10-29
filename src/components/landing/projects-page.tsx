@@ -177,15 +177,26 @@ function PhotoStrip({ photos }: { photos: { src: string; alt: string }[] }) {
 
     el.scrollLeft = setWidth();
 
-    const onScroll = () => {
+    // Recentre only once scrolling has settled: jumping scrollLeft mid-momentum or mid-snap
+    // cancels the animation and makes the wrap visibly stutter. Copies are identical, so the
+    // jump by exactly one set width lands on the same visual position.
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const recentre = () => {
       const w = setWidth();
       if (!w) return;
       if (el.scrollLeft < w * 0.5) el.scrollLeft += w;
       else if (el.scrollLeft >= w * 1.5) el.scrollLeft -= w;
     };
+    const onScroll = () => {
+      clearTimeout(timer);
+      timer = setTimeout(recentre, 150);
+    };
 
     el.addEventListener("scroll", onScroll, { passive: true });
-    return () => el.removeEventListener("scroll", onScroll);
+    return () => {
+      clearTimeout(timer);
+      el.removeEventListener("scroll", onScroll);
+    };
   }, [single]);
 
   return (
