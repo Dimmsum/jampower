@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #111114;
+  --muted: #5b5b66;
+  --surface: #f5f5f7;
+  --border: #e4e4ea;
+  --brand: #e11d2a;
+  --brand-hover: #b9161f;
+  --sun: #ff7a45;
+  --night: #0c0c10;
+
+  /* Landing page palette */
+  --jp-ink: #0e1116;
+  --jp-red: #e3262b;
+  --jp-red-hover: #c51c21;
+  --jp-cream: #f4efe7;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-sun: var(--sun);
+  --color-night: var(--night);
+  --color-jp-ink: var(--jp-ink);
+  --color-jp-red: var(--jp-red);
+  --color-jp-red-hover: var(--jp-red-hover);
+  --color-jp-cream: var(--jp-cream);
+  --font-manrope: var(--font-manrope-family);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+:focus-visible {
+  outline: 3px solid var(--sun);
+  outline-offset: 2px;
+}
+
+/* Landing page motion */
+@keyframes jpFade { from { opacity: 0 } to { opacity: 1 } }
+@keyframes jpDown { from { opacity: 0; transform: translateY(-16px) } to { opacity: 1; transform: none } }
+@keyframes jpUp { from { opacity: 0; transform: translateY(24px) } to { opacity: 1; transform: none } }
+@keyframes jpRise { from { transform: translateY(110%) } to { transform: none } }
+@keyframes jpZoom {
+  from { transform: scale(1.5) translateY(-6%); filter: blur(6px) brightness(0.5) }
+  60% { filter: blur(0) brightness(0.85) }
+  to { transform: scale(1) translateY(0); filter: blur(0) brightness(1) }
+}
+@keyframes jpScroll { from { transform: translateY(-100%) } to { transform: translateY(220%) } }
+@keyframes jpSlideIn { from { transform: translateX(100%) } to { transform: none } }
+@keyframes jpKen { from { transform: scale(1.08) } to { transform: scale(1) } }
+@keyframes jpSwap { from { opacity: 0; transform: translateY(14px) } to { opacity: 1; transform: none } }
+@keyframes jpSwapImg { from { opacity: 0; transform: scale(1.04) } to { opacity: 1; transform: none } }
+@keyframes jpDrift { from { transform: scale(1) } to { transform: scale(1.06) } }
+
+/* Scroll-revealed blocks; the landing page script toggles inline opacity/transform. */
+.jp-reveal {
+  --jp-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  opacity: 0;
+  transform: translateY(var(--jp-shift, 32px));
+  transition:
+    opacity var(--jp-dur, 800ms) var(--jp-ease) var(--jp-delay, 0ms),
+    transform var(--jp-dur, 800ms) var(--jp-ease) var(--jp-delay, 0ms);
+}
