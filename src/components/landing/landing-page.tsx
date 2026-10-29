@@ -341,7 +341,7 @@ export function LandingPage() {
               className="jp-reveal mt-[clamp(72px,9vw,128px)] flex flex-wrap items-center justify-between gap-6 border-t border-white/14 pt-8"
             >
               <p className="m-0 max-w-[36ch] text-[clamp(20px,2vw,30px)] font-semibold leading-[1.3] tracking-[-0.02em] text-balance">
-                Want to see what they helped us build?
+                Want to see what we have built?
               </p>
               <PrimaryCta
                 href="/projects"
