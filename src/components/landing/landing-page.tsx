@@ -471,7 +471,7 @@ export function LandingPage() {
             </div>
 
             <div className="mt-[clamp(48px,6vw,88px)] grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-5">
-              <SolutionCard label="Savings" num="01">
+              <SolutionCard label="Savings">
                 <div className="text-[clamp(44px,4.6vw,72px)] font-extrabold leading-none tracking-[-0.04em]">
                   100%
                 </div>
@@ -482,7 +482,7 @@ export function LandingPage() {
                 </SolutionBody>
               </SolutionCard>
 
-              <SolutionCard label="Design" num="02" highlight>
+              <SolutionCard label="Design" highlight>
                 <div className="text-[clamp(28px,2.6vw,40px)] font-extrabold leading-[1.05] tracking-[-0.03em]">
                   Built for the{" "}
                   <span className="font-normal text-jp-cream">Caribbean</span>
@@ -497,7 +497,7 @@ export function LandingPage() {
                 </SolutionBody>
               </SolutionCard>
 
-              <SolutionCard label="Our results" num="03">
+              <SolutionCard label="Our results">
                 <ul className="flex flex-col gap-2.5">
                   {[
                     "Lower, predictable energy costs",
@@ -532,12 +532,10 @@ export function LandingPage() {
 
 function SolutionCard({
   label,
-  num,
   highlight = false,
   children,
 }: {
   label: string;
-  num: string;
   highlight?: boolean;
   children: React.ReactNode;
 }) {
@@ -551,12 +549,11 @@ function SolutionCard({
       }`}
     >
       <div
-        className={`flex items-center justify-between text-[11px] font-bold uppercase tracking-[0.16em] ${
+        className={`flex items-center text-[11px] font-bold uppercase tracking-[0.16em] ${
           highlight ? "text-white/80" : "text-white/60"
         }`}
       >
         <span>{label}</span>
-        <span className="text-[13px] font-extrabold text-white">{num}</span>
       </div>
       {children}
     </div>
