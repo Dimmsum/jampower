@@ -209,7 +209,7 @@ export function LandingPage() {
               >
                 Trusted across the region.{" "}
                 <span className="font-normal text-jp-cream">
-                  A few of the people we have workedwith.
+                  A few of the people we have worked with.
                 </span>
               </h2>
             </div>
